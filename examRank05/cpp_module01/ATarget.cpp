@@ -1,39 +1,32 @@
-
-
 #include "ATarget.hpp"
 
-ATarget::ATarget(const std::string &Type)
+ATarget::ATarget(std::string type) : _type(type)
 {
-    this->type = Type;
+
+}
+
+ATarget & ATarget::operator=(ATarget const & rhs)
+{
+	_type = rhs.getType();
+	return *this;
+}
+
+ATarget::ATarget(ATarget const & obj)
+{
+	*this = obj;
 }
 
 ATarget::~ATarget()
 {
+
 }
 
-ATarget::ATarget(const ATarget &copy)
+std::string ATarget::getType() const
 {
-    *this = copy;
+	return (_type);
 }
 
-ATarget &ATarget::operator=(const ATarget &src)
+void	ATarget::getHitBySpell(ASpell const & spell) const
 {
-    if(this != &src)
-    {
-        this->type = src.type;
-    }
-    return *this;
+	std::cout << _type << " has been " << spell.getEffects() << "!" << std::endl;
 }
-
-const std::string& ATarget::getType() const
-{
-    return this->type;
-}
-
-
-void ATarget::getHitBySpell(const ASpell &ASpell) const
-{
-    std::cout<<getType()<< " has been "<<ASpell.getEffects()<<"!"<<std::endl;
-}
-
-
